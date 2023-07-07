@@ -1,0 +1,29 @@
+@font-face {
+    font-family: "Get Schwitfy Normal";
+    src: url("../Fonts/get_schwifty.ttf");
+}
+.card {
+    width: 500px;
+    height: 870px;
+    background-color: #b5edfb;
+    border-radius: 20px;
+    margin: 25px;
+}
+.img {
+    height: 450px;
+    margin-top: 20px;
+    border-radius: 20px;
+}
+.info {
+    width: 450px;
+    background-color: #252A3C;
+    color: #b5edfb;
+    border-radius: 30px;
+    margin-top: 15px;
+    margin-bottom: 0px;
+    margin-left: 25px;
+    margin-right: 25px;
+    padding-top: 5px;
+    position: relative;
+    font-family: "Get Schwitfy Normal";
+}

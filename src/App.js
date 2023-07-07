@@ -1,25 +1,73 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
 import './App.css';
+import Nav from "./components/Nav/Nav"
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom';
+import About from './components/About/About';
+import Home from "./components/Home/Home"
+import Detail from "./components/Detail/Detail"
+import axios from 'axios';
+import Error from './components/Error/Error';
+import Form from './components/Form/Form';
+import Favorites from "./components/Favorites/Favorites"
+
+const EMAIL = "bogdan.andrei.faur@gmail.com";
+const PASSWORD = "asd123";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+   const [characters, setCharacters] = useState([]);
+   const {pathname} = useLocation();
+
+   const navigate = useNavigate();
+   const [access, setAccess] = useState(false);
+
+   function login(userData){
+      if (userData.password === PASSWORD && userData.email === EMAIL){
+         setAccess(true);
+         navigate("/home");
+      }
+   }
+
+   function logOut(){
+      setAccess(false);
+      navigate("/");
+   }
+
+   useEffect(() => {
+      !access && navigate("/");
+      // eslint-disable-next-line
+   }, [access]);
+
+   function onSearch(id){
+      axios(`https://rickandmortyapi.com/api/character/${id}`)
+         .then(({ data }) => {
+         if (data.name && !characters.find((char) => char.id === data.id)) {
+            setCharacters((oldChars) => [...oldChars, data]);
+         }
+      })
+      .catch((err) => window.alert("No characters with this ID!"));
+   }
+
+   const onClose = function(id){
+      setCharacters(
+         characters.filter((char) => {
+            return char.id !== Number(id)
+         })
+      )
+   }
+
+   return (
+      <div className='App'>
+         {pathname !== "/" && <Nav onSearch={onSearch} logOut={logOut}/>}
+            <Routes>
+               <Route path="/" element={<Form login={login}/>}/>
+               <Route path="/home" element={<Home characters={characters} onClose={onClose}/>}/>
+               <Route path="/about" element={<About/>}/>
+               <Route path="/detail/:id" element={<Detail/>}/>
+               <Route path="*" element={<Error/>} />
+               <Route path='/favorites' element={<Favorites/>}/>
+            </Routes>
+      </div>
+   );
 }
 
 export default App;

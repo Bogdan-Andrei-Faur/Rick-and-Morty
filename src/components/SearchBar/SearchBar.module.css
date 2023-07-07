@@ -1,0 +1,21 @@
+.search {
+    width: 200px;
+    height: 40px;
+    padding-left: 5px;
+    margin-top: 10px;
+    background-color: #252A3C;
+    color: #b5edfb;
+    border: 0px;
+    border-radius: 20px;
+}
+.submit {
+    width: 65px;
+    height: 40px;
+    background-color: #252A3C;
+    color: #b5edfb;
+    border: 0px;
+    border-radius: 20px;
+    padding: 10px;
+    position: relative;
+    left: 10px;
+}

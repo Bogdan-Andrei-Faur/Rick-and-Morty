@@ -1,0 +1,51 @@
+@font-face {
+    font-family: "Get Schwitfy Normal";
+    src: url("../Fonts/get_schwifty.ttf");
+}
+
+.card {
+    width: 350px;
+    height: 580px;
+    background-color: #b5edfb;
+    border-radius: 20px;
+    margin: 10px;
+}
+.close {
+    width: 20px;
+    height: 20px;
+    background-color: #252A3C;
+    color: #b5edfb;
+    border: 0px;
+    padding: 0px 0px;
+    border-radius: 10px;
+    position: relative;
+    bottom: 348px;
+    left: 158px;
+}
+.name {
+    width: 160px;
+    background-color: #252A3C;
+    color: #b5edfb;
+    border-radius: 20px;
+    margin: 0px 95px;
+    position: relative;
+    bottom: 150px;
+    padding: 5px 0px;
+    font-family: "Get Schwitfy Normal";
+}
+.image {
+    margin: 25px;
+    border-radius: 20px;
+}
+.info {
+    width: 250px;
+    background-color: #252A3C;
+    color: #b5edfb;
+    border-radius: 20px;
+    margin: 5px 50px;
+    padding: 5px 0px;
+    position: relative;
+    bottom: 80px;
+    font-family: "Get Schwitfy Normal";
+    max-height: 80px;
+}

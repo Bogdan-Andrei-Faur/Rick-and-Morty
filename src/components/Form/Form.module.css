@@ -1,0 +1,70 @@
+@font-face {
+    font-family: "Get Schwitfy Normal";
+    src: url("../Fonts/get_schwifty.ttf");
+}
+
+.div {
+    padding-top: 300px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.form {
+    background-color: #b5edfb;
+    padding:20px 20px;
+    border-radius: 10px;
+}
+.titulo {
+    color: #252A3C;
+    margin: 0px;
+    font-family: "Get Schwitfy Normal";
+    font-size: 50px;
+}
+.emailText {
+    color: #252A3C;
+    text-align: center;
+    margin: 0px;
+    padding: 0px 135px;
+    font-family: "Get Schwitfy Normal";
+    font-size: 30px;
+}
+.email {
+    width: 305px;
+    height: 40px;
+    background-color: #252A3C;
+    color: #b5edfb;
+    border: none;
+    padding: 0px 15px;
+    border-radius: 20px;
+}
+.passwordText {
+    color: #252A3C;
+    margin: 0px;
+    padding: 0px 114px;
+    font-family: "Get Schwitfy Normal";
+    font-size: 30px;
+}
+.password {
+    width: 305px;
+    height: 40px;
+    background-color: #252A3C;
+    color: #b5edfb;
+    border: none;
+    padding: 0px 15px;
+    border-radius: 20px;
+}
+.error {
+    color: red;
+    margin: 0px 0px;
+}
+.buttonPosition {
+    padding: 0px 100px;
+}
+.button {
+    background-color: #252A3C;
+    color: #b5edfb;
+    border: none;
+    padding: 10px 30px;
+    border-radius: 20px;
+}
