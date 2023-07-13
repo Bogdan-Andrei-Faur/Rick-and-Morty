@@ -1,12 +1,44 @@
-import React from "react";
-import { connect } from "react-redux";
+import React, { useState } from "react";
+import { connect, useDispatch, useSelector } from "react-redux";
 import Card from "../Card/Card";
+import { filterCards, orderCards, todos } from "../../Redux/Actions/Actions";
 
-function Favorites({myFavorites}){
+function Favorites(){
+    const myFavorites = useSelector((state) => state.myFavorites);
+    const dispatch = useDispatch();
+    const [booleano, setBooleano] = useState(false);
+
+    function handleOrder(event){
+        dispatch(orderCards(event.target.value))
+        setBooleano(!booleano)
+    }
+
+    function handleFilter(event){
+        if (event.target.value === "Todos"){
+            dispatch(todos())
+        } else {
+            dispatch(filterCards(event.target.value))
+        }
+        
+    }
+
     return (
         <div>
+            <select onChange={handleOrder}>
+                <option value="A">Ascendente</option>
+                <option value="B">Descendente</option>
+            </select>
+
+            <select onChange={handleFilter}>
+                <option value="Todos">Todos</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+                <option value="Genderless">Genderless</option>
+                <option value="unknown">Unknown</option>
+            </select>
+
             {
-                myFavorites.map(({id, name, status, species, gender, origin, image}) => {
+                myFavorites?.map(({id, name, status, species, gender, origin, image}) => {
                     return (
                         <Card
                             key={id}

@@ -5,3 +5,15 @@ export function addFav(character){
 export function removeFav(id){
     return {type: "REMOVE_FAV", payload: id}
 }
+
+export function filterCards(gender){
+    return {type: "FILTER", payload: gender}
+}
+
+export function orderCards(order){
+    return {type: "ORDER", payload: order}
+}
+
+export function todos(){
+    return {type: "Todos"}
+}
