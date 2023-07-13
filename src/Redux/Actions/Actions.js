@@ -1,7 +1,7 @@
-export function addFavorite(objCharacter){
-    return {type: "ADDFAVORITE", payload: objCharacter}
+export function addFav(character){
+    return {type: "ADD_FAV", payload: character}
 }
 
-export function deleteFavorite(id){
-    return {type: "DELETEFAVORITE", payload: id}
+export function removeFav(id){
+    return {type: "REMOVE_FAV", payload: id}
 }

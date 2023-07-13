@@ -2,11 +2,11 @@ import React from "react";
 import { connect } from "react-redux";
 import Card from "../Card/Card";
 
-function Favorites({favorites}){
+function Favorites({myFavorites}){
     return (
         <div>
             {
-                favorites.map(({id, name, status, species, gender, origin, image}) => {
+                myFavorites.map(({id, name, status, species, gender, origin, image}) => {
                     return (
                         <Card
                             key={id}
@@ -27,8 +27,8 @@ function Favorites({favorites}){
 
 const mapStateToProps = function(state){
     return {
-        favorites: state.favorites
+        myFavorites: state.myFavorites
     }
 }
 
-export default connect(mapStateToProps, null)(Favorites);
+export default connect(mapStateToProps)(Favorites);
