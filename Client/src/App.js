@@ -38,10 +38,11 @@ function App() {
    }, [access]);
 
    function onSearch(id){
-      axios(`https://rickandmortyapi.com/api/character/${id}`)
-         .then(({ data }) => {
-         if (data.name && !characters.find((char) => char.id === data.id)) {
-            setCharacters((oldChars) => [...oldChars, data]);
+      axios(`http://localhost:3001/rickandmorty/onsearch/${id}`)
+         .then((response) => {
+         if (response.data.name && !characters.find((char) => char.id === response.data.id)) {
+            setCharacters((oldChars) => [...oldChars, response.data]);
+            
          }
       })
       .catch((err) => window.alert("No characters with this ID!"));
