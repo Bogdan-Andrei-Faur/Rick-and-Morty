@@ -6,16 +6,11 @@ const initialState = {
 
 export default function rootReducer(state = initialState, action){
     switch(action.type){
-        case "ADD_FAV":
-            const addCopy = [...state.allCharacters, action.payload]
-            return {...state, myFavorites: addCopy, allCharacters: addCopy};
-
-        case "REMOVE_FAV":
-            return {
-                ...state,
-                myFavorites: state.myFavorites.filter((fav) => fav.id !== action.payload),
-                allCharacters: state.allCharacters.filter((fav) => fav.id !== action.payload)
-            };
+        case 'ADD_FAV':
+            return { ...state, myFavorites: action.payload, allCharacters: action.payload };
+            
+        case 'REMOVE_FAV':
+            return { ...state, myFavorites: action.payload };
 
         case "FILTER":
             return {...state, myFavorites: state.allCharacters.filter((pj) => pj.gender === action.payload)}

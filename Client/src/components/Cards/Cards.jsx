@@ -13,7 +13,7 @@ export default function Cards({characters, onClose}) {
                   status={status}
                   species={species}
                   gender={gender}
-                  origin={origin.name}
+                  origin={origin}
                   image={image}
                />
       })}</div>

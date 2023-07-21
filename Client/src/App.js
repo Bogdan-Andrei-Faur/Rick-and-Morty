@@ -10,9 +10,6 @@ import Error from './components/Error/Error';
 import Form from './components/Form/Form';
 import Favorites from "./components/Favorites/Favorites"
 
-const EMAIL = "bogdan.andrei.faur@gmail.com";
-const PASSWORD = "asd123";
-
 function App() {
    const [characters, setCharacters] = useState([]);
    const {pathname} = useLocation();
@@ -20,11 +17,14 @@ function App() {
    const navigate = useNavigate();
    const [access, setAccess] = useState(false);
 
-   function login(userData){
-      if (userData.password === PASSWORD && userData.email === EMAIL){
-         setAccess(true);
-         navigate("/home");
-      }
+   function login(userData) {
+      const { email, password } = userData;
+      const URL = 'http://localhost:3001/user/login/';
+      axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+         const { access } = data;
+         setAccess(data);
+         access && navigate('/home');
+      });
    }
 
    function logOut(){
@@ -38,7 +38,7 @@ function App() {
    }, [access]);
 
    function onSearch(id){
-      axios(`http://localhost:3001/rickandmorty/onsearch/${id}`)
+      axios(`http://localhost:3001/character/${id}`)
          .then((response) => {
          if (response.data.name && !characters.find((char) => char.id === response.data.id)) {
             setCharacters((oldChars) => [...oldChars, response.data]);

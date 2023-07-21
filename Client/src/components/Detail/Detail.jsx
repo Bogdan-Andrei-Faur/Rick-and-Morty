@@ -9,7 +9,7 @@ export default function Detail(){
     const [character, setCharacter] = useState([])
 
     useEffect(() => {
-        axios(`http://localhost:3001/rickandmorty/detail/${id}`).then((response) => {
+        axios(`http://localhost:3001/character/${id}`).then((response) => {
            if (response.data.name) {
               setCharacter(response.data);
            } else {
@@ -26,7 +26,7 @@ export default function Detail(){
             <h1 className={style.info}>Status: {character.status}</h1>
             <h1 className={style.info}>Species: {character.species && character.species}</h1>
             <h1 className={style.info}>Gender: {character.gender && character.gender}</h1>
-            <h1 className={style.info}>Origin: {character.origin?.name && character.origin?.name}</h1>
+            <h1 className={style.info}>Origin: {character.origin && character.origin}</h1>
         </div>
     )
 }

@@ -2,29 +2,31 @@ const axios = require("axios");
 require("dotenv").config()
 const {API_URL} = process.env;
 
-function getById(res, id){
-    axios(API_URL + id)
-        .then((response) => {
-            const {data} = response;
+function getCharById(req, res){
+    const {id} = req.params;
+    axios(`${API_URL}${id}`)
+        .then(({data}) => {
+            if (data.error){
+                return res.status(404).send(data.error);
+            }
+            
             const character = {
-                id: Number(id),
+                id: Number(data.id),
                 name: data.name,
                 status: data.status,
                 species: data.species,
                 gender: data.gender,
-                origin: data.origin,
+                origin: data.origin.name,
                 image: data.image
             }
-
-            res.writeHead(200, {"Content-type": "application/json"});
-            res.end(JSON.stringify(character));
+            
+            return res.status(200).json(character);
         })
-        .catch(error => {
-            res.writeHead(404, {"Content-type": "text/plain"});
-            res.end(error.message);
+        .catch((axiosError) => {
+            return res.status(500).send(axiosError.message)
         })
 }
 
 module.exports = {
-    getById
+    getCharById
 }

@@ -1,22 +1,34 @@
-const http = require("http");
+//Express
+const express = require('express');
+const server = express();
+//Morgan
+const morgan = require("morgan");
+//Cors
+const cors = require("cors");
+//Dotenv
 require("dotenv").config();
 const {PORT} = process.env;
-const {getById} = require("./controllers/getCharById.js");
+//Routers
+const {characterRouter} = require('./routes/character');
+const {userRouter} = require('./routes/user');
+const {favoriteRouter} = require("./routes/favorites")
 
+//Middlewars
+server.use(express.json());
+server.use(morgan("dev"));
 
-http.createServer((request, response) => {
-    response.setHeader("Access-Control-Allow-Origin", "*");
-    const id = request.url.split("/").at(-1);
+//Permisos
+server.use(cors());
 
-    if (request.url.includes("onsearch")){
-        return getById(response, id);
-    }
+//Routers
+server.use("/character", characterRouter);
+server.use("/user", userRouter);
+server.use("/favorites", favoriteRouter);
 
-    if (request.url.includes("detail")){
-        return getById(response, id);
-    }
+server.get("/health-check/:id", (req, res) => {
+   res.end("Working");
+});
 
-}).listen(PORT, () => {
-    console.log("Server running OK on " + PORT);
-
-})
+server.listen(PORT, () => {
+   console.log('Server raised in port: ' + PORT);
+});
