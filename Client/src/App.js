@@ -17,14 +17,19 @@ function App() {
    const navigate = useNavigate();
    const [access, setAccess] = useState(false);
 
-   function login(userData) {
+   async function login(userData) {
       const { email, password } = userData;
       const URL = 'http://localhost:3001/user/login/';
-      axios(URL + `?email=${email}&password=${password}`).then(({ data }) => {
+      
+      try {
+         const backLogin = await axios(URL + `?email=${email}&password=${password}`)
+         const {data} = backLogin;
          const { access } = data;
-         setAccess(data);
+         setAccess(access);
          access && navigate('/home');
-      });
+      } catch (error) {
+         alert(error.message);
+      }
    }
 
    function logOut(){
@@ -37,15 +42,18 @@ function App() {
       // eslint-disable-next-line
    }, [access]);
 
-   function onSearch(id){
-      axios(`http://localhost:3001/character/${id}`)
-         .then((response) => {
-         if (response.data.name && !characters.find((char) => char.id === response.data.id)) {
-            setCharacters((oldChars) => [...oldChars, response.data]);
-            
+   async function onSearch(id){
+      try {
+         const backRequest = await axios(`http://localhost:3001/character/${id}`);
+
+         if (backRequest.data.name) {
+            setCharacters((oldChars) => [...oldChars, backRequest.data]);
+         } else {
+            alert("Character not found.")
          }
-      })
-      .catch((err) => window.alert("No characters with this ID!"));
+      } catch (error) {
+         alert(error.response.data.error);
+      }
    }
 
    const onClose = function(id){
